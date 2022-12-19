@@ -1,0 +1,71 @@
+.auto-complete-tag {
+    border       : 1px solid #ccc;
+    border-radius: 4px;
+    padding      : 4px;
+    display      : flex;
+    font-size    : 12px;
+    flex-wrap    : wrap;
+    line-height  : 20px;
+}
+
+.auto-complete-tag * {
+    padding       : 0;
+    margin        : 0;
+    list-style    : none;
+    vertical-align: middle;
+}
+
+.auto-complete-tag .input-container {
+    position : relative;
+    flex     : 1;
+    min-width: 100px;
+}
+
+.auto-complete-tag .input-container input {
+    border     : 0;
+    line-height: 20px;
+    width      : 100%;
+}
+
+.auto-complete-tag .input-container input:focus {
+    outline: none;
+}
+
+.auto-complete-tag .source-list {
+    position     : absolute;
+    background   : #fff;
+    top          : 30px;
+    left         : 0;
+    right        : 0;
+    border       : 1px solid #ccc;
+    padding      : 5px 0;
+    border-radius: 4px;
+    line-height  : 24px;
+
+}
+
+.auto-complete-tag .source-list li {
+    padding: 0 10px;
+    cursor : pointer;
+}
+
+.auto-complete-tag .source-list li:hover {
+    background: #ccc;
+}
+
+.auto-complete-tag .selected-tag {
+    border       : 1px solid #ccc;
+    background   : #eee;
+    border-radius: 2px;
+    padding      : 0 4px;
+    margin-right : 5px;
+    display      : flex;
+    align-items  : center;
+}
+
+.auto-complete-tag .selected-tag .close-icon {
+    margin-left: 4px;
+    margin-top : -2px;
+    cursor     : pointer;
+    color      : #999;
+}
