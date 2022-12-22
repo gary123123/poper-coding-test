@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <p>japan0 america1 china2 有数据</p>
-    <div class="search-container"></div>
+    <div class="header">
+      <p>japan0 america1 china2 有数据</p>
+      <div class="search-container"></div>
+    </div>
     <div class="content-list"></div>
     <div class="pagination">
       <div class="prev-page">上一页</div>
@@ -48,11 +50,11 @@
         contentHtml +=
           '<div class="content-item"><div class="content-text"><div class="content-title">' +
           item.title +
-          '</div><div class="content-desc">' +
-          item.content +
-          '</div></div><img class="content-img" data-lazyLoad="' +
+          '</div><img class="content-img" data-lazyLoad="' +
           item.img +
-          '" src=""/></div>';
+          '" src=""/><div class="content-desc">' +
+          item.content +
+          "</div></div></div>";
       }
       containerDom.innerHTML = contentHtml;
       window.scrollTo(0, 0);

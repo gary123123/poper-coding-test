@@ -1,12 +1,34 @@
 var dataList = [];
 
-var contryList = ["japan", "america", "china"];
+var contryList = [
+  "japan",
+  "america",
+  "china",
+  "slovakia",
+  "germany",
+  "ireland",
+  "france",
+];
+var imgList = [
+  "https://upload-images.jianshu.io/upload_images/5809200-a99419bb94924e6d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-736bc3917fe92142.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-7fe8c323e533f656.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-c12521fbde6c705b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-caf66b935fd00e18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-48dd99da471ffa3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-4de5440a56bff58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-03bbbd715c24750e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-4de5440a56bff58f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+  "https://upload-images.jianshu.io/upload_images/5809200-03bbbd715c24750e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240",
+];
+
 for (var index1 = 0; index1 < contryList.length; index1++) {
   var item1 = contryList[index1];
-  for (var index2 = 0; index2 < 100; index2++) {
+  for (var index2 = 0; index2 < 20; index2++) {
+    var imgIndex = parseInt(Math.random() * 10);
     dataList.push({
       title: "标题" + item1 + index1,
-      img: "./img/tab1.png",
+      img: imgList[imgIndex],
       country: {
         value: item1 + index1,
         text: item1 + index1,

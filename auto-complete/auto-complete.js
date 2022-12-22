@@ -7,7 +7,7 @@ AutoComplete.prototype = {
     this.options = {
       selector: "",
       source: [],
-      pageSize: 10,
+      pageSize: 100000,
       onSearch: function () {},
     };
     for (var k in options) {
@@ -43,9 +43,10 @@ AutoComplete.prototype = {
     for (var index = 0; index < dataList.length; index++) {
       var liDom = document.createElement("li");
       liDom.setAttribute("data-value", dataList[index].value);
+      liDom.setAttribute("data-index", index);
       liDom.innerHTML = dataList[index].text;
       liFragment.appendChild(liDom);
-      liDom.onclick = this.handleAddSelectValue(dataList[index]);
+      liDom.onmousedown = this.handleAddSelectValue(dataList[index]);
     }
     sourceListDom.appendChild(liFragment);
     document.querySelector(this.inputContainerClass).appendChild(sourceListDom);
@@ -112,10 +113,7 @@ AutoComplete.prototype = {
         if (resultList.length > _this.options.pageSize) {
           break;
         }
-        if (
-          item.text.indexOf(textValue) > -1 &&
-          _this.selectedValue[item.value] === undefined
-        ) {
+        if (item.text.indexOf(textValue) > -1) {
           resultList.push(item);
         }
       }
@@ -131,6 +129,7 @@ AutoComplete.prototype = {
       );
       var sourceListLength = sourceListDom ? sourceListDom.children.length : 0;
       if (event.keyCode == 40 && sourceListLength) {
+        event.preventDefault();
         _this.selectedSourceIndex++;
         if (_this.selectedSourceIndex > sourceListLength - 1) {
           _this.selectedSourceIndex = 0;
@@ -139,6 +138,7 @@ AutoComplete.prototype = {
           sourceListDom.childNodes[_this.selectedSourceIndex].innerText;
         _this.sourceListItemClassChange();
       } else if (event.keyCode == 38 && sourceListLength) {
+        event.preventDefault();
         _this.selectedSourceIndex--;
         if (_this.selectedSourceIndex <= -1) {
           _this.selectedSourceIndex = sourceListLength - 1;
@@ -150,7 +150,11 @@ AutoComplete.prototype = {
         var selectedSourceItem = _this.querySelector(
           " .source-list li[selected='true']"
         );
-        if (selectedSourceItem) {
+        if (
+          selectedSourceItem &&
+          _this.selectedValue[selectedSourceItem.getAttribute("data-value")] ===
+            undefined
+        ) {
           _this.addTag({
             value: selectedSourceItem.getAttribute("data-value"),
             text: selectedSourceItem.innerText,
@@ -182,11 +186,9 @@ AutoComplete.prototype = {
     var _this = this;
     return function () {
       var that = this;
-      setTimeout(function () {
-        _this.selectedSourceIndex = -1;
-        that.value = "";
-        _this.removeSourceListDom();
-      }, 200);
+      _this.selectedSourceIndex = -1;
+      that.value = "";
+      _this.removeSourceListDom();
     };
   },
   sourceListItemClassChange: function () {
@@ -200,6 +202,8 @@ AutoComplete.prototype = {
       } else {
         item.style.backgroundColor = "#ccc";
         item.setAttribute("selected", true);
+        var itemIndex = item.getAttribute("data-index");
+        sourceListDom.scrollTop = item.offsetHeight * itemIndex;
       }
     }
   },

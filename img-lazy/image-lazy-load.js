@@ -49,9 +49,9 @@ ImageLazyLoad.prototype = {
         elem.removeAttribute("data-lazyLoad");
       }
     }
-    // if (!length) {
-    //   this.removeEvent();
-    // }
+    if (!(context || document).querySelectorAll("[data-lazyLoad]").length) {
+      this.removeEvent();
+    }
   },
   removeEvent: function () {
     window.removeEventListener("scroll", this.debounceOrThrottle);
