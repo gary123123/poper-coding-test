@@ -1,6 +1,7 @@
 var ImageLazyLoad = function () {
   this.init();
 };
+let a = 1;
 ImageLazyLoad.prototype = {
   init: function (opts) {
     opts = opts || {};
@@ -18,12 +19,6 @@ ImageLazyLoad.prototype = {
     };
     this.delay = opts.throttle || 250;
     this.render();
-    window.addEventListener(
-      "scroll",
-      this.debounceOrThrottle.bind(this),
-      false
-    );
-    window.addEventListener("load", this.debounceOrThrottle.bind(this), false);
   },
   render: function (context) {
     var nodes = (context || document).querySelectorAll("[data-lazyLoad]");
@@ -51,11 +46,19 @@ ImageLazyLoad.prototype = {
     }
     if (!(context || document).querySelectorAll("[data-lazyLoad]").length) {
       this.removeEvent();
+    } else if (!this.scrollEvent) {
+      this.addEvent();
     }
   },
+  addEvent: function () {
+    this.scrollEvent = this.debounceOrThrottle.bind(this);
+    window.addEventListener("scroll", this.scrollEvent, false);
+    window.addEventListener("load", this.scrollEvent, false);
+  },
   removeEvent: function () {
-    window.removeEventListener("scroll", this.debounceOrThrottle);
+    window.removeEventListener("scroll", this.scrollEvent);
     clearTimeout(this.poll);
+    this.scrollEvent = null;
   },
   inView: function (element, view) {
     if (this.isHidden(element)) {
