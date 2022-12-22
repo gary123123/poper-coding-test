@@ -85,3 +85,4 @@ ImageLazyLoad.prototype = {
     }, this.delay);
   },
 };
+module.exports = ImageLazyLoad;

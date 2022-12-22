@@ -223,3 +223,5 @@ AutoComplete.prototype = {
     return document.querySelector(this.options.selector + selector);
   },
 };
+
+module.exports = AutoComplete;
