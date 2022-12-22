@@ -1,7 +1,6 @@
 var ImageLazyLoad = function () {
   this.init();
 };
-let a = 1;
 ImageLazyLoad.prototype = {
   init: function (opts) {
     opts = opts || {};
